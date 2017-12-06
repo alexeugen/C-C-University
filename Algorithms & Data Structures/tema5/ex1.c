@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stdlib.h>
 using namespace std;
 
 struct nod{
@@ -204,6 +204,52 @@ void ex3()
 
 }
 
+
+
+void ex2_frumi(nod *temp)
+{
+    nod *temp2;
+    nod *prev;
+
+    temp2 = head;
+    if(head == NULL)
+    {   
+        head = temp;
+        tail = temp;
+    }
+    else
+    {
+        if(temp2->data >= temp->data)
+        {
+            temp->next = head;
+            head = temp;
+        }
+        else if(temp->data >= tail->data)
+        {
+            tail->next = temp;
+            tail = temp;
+        }
+        else
+        {
+            prev = temp2;
+            temp2 = temp2->next;
+        
+            while(temp2)
+            {
+                if(temp2->data >= temp->data)
+                {   
+                    temp->next = temp2;
+                    prev->next = temp;
+                    break;
+                }
+                prev = temp2;
+                temp2=temp2->next;
+            }
+        }
+    }
+    
+}
+
 // INTERCLASARE DOUA LISTE ***********************************
 void ex4()
 {
@@ -212,8 +258,10 @@ void ex4()
 
     while(temp2)
     {
-        ex2(new_nod(temp2->data));
+        nod *frumi = temp2;
         temp2 = temp2->next;
+        ex2_frumi(frumi);
+        
     }
 }
 
@@ -299,41 +347,35 @@ void ex7()
 		temp3 = tempi;
 		temp1 = head;
 		while(temp1)
-		{ /*
-			nod *temp = new_nod((temp2->data * temp1->data + aux + (temp3->next) ? temp3->next->data : 0) % 10 );
-			aux = (temp2->data * temp1->data + aux  + (temp3->next) ? temp3->next->data : 0) / 10; */
+		{ 
+		
+            int x = temp3->data;
+            cout<< (temp2->data * temp1->data + aux ) % 10 << " '" << x << "' ";
+			temp3->data = (x + temp2->data * temp1->data + aux ) % 10 ;
+			aux = (x + temp2->data * temp1->data + aux ) / 10;
+
+            
+            if(temp3->next == NULL)
+			     temp3->next = new_nod(0);
+			temp3 = temp3->next;
 			
-			if(temp3)
-			{
-				temp3->data = (temp3->data + temp2->data * temp1->data + aux ) % 10 ;
-				aux = (temp3->data + temp2->data * temp1->data + aux ) / 10;
-				temp3->next = new_nod(0);
-				temp3 = temp3->next;
-			}
-			else
-			{
-				if(temp3 == head3)
-				{
-					head3 = new_nod((temp2->data * temp1->data + aux) % 10);
-					aux = (temp2->data * temp1->data + aux) / 10;
-					temp3 = head3;
-				}
-				else
-				{
-					nod *temp = new_nod((temp2->data * temp1->data + aux) % 10);
-					aux = (temp2->data * temp1->data + aux) / 10;
-					temp3 = temp;
-					temp3=temp3->next;
-				}
-			}
-			cout<<temp3->data;
 			temp1 = temp1->next;
 		}
-		cout<<endl;
-		
+        temp3->data = aux;
+        aux =0;
+		cout<<endl<<"   ";
+		tempi = tempi->next;
 		temp2 = temp2->next;
+
 		
 	}
+    if(temp3->data == 0)
+    {
+    nod *pampam = head3;
+    while(pampam->next != temp3)
+        pampam=pampam->next;
+    pampam->next = NULL;
+    }
 }
 
 int main()
@@ -342,23 +384,18 @@ int main()
     tail = new nod;
     head = NULL;
     tail = NULL;
-    head3 = new_nod(0);
-    head3 = NULL;
-    
-
-  /*  adf_ex1(1);
-    adf_ex1(2);
-    adf_ex1(3);
-    af();
-    ex1(); */
  
+    head3 = new_nod(0);
+
     ex2(new_nod(1));
-     ex2(new_nod(2));
-      ex2(new_nod(3));
+     ex2(new_nod(3));
+     // ex2(new_nod(8));
 
     adf_2(2);
- //  	adf_2(3);
-   
+   	adf_2(4);
+    
+
+
     af();
     af2();
 

@@ -293,7 +293,7 @@ void ex6(int c)
 	}
 
 }
-/*
+
 void ex7()
 {
 	nod *temp1 = head;
@@ -343,7 +343,7 @@ void ex7()
 		
 	}
 }
-*/
+
 int main()
 {
     head = new nod;
