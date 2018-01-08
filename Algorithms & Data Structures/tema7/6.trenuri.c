@@ -2,63 +2,78 @@
 
 using namespace std;
 
-int main()
+struct depou
 {
-	int c1[11] , c2[11], c3[11];
-	int v[10]={3, 6, 9, 2, 4, 7, 1, 8, 5};
+	int j;
+	int m;
+	int a[100];
+};
 
-	int i1=1;
-	int i2=1;
-	int i3=1;
+int main()
+{	
 
-	c1[0] = -1;
-	c2[0] = -1;
-	c3[0] = -1;
-	int i=0;
-	while(i<=9)
+	depou v[100];
+	int n, k = 3, l;
+	int c[] = {3, 6, 9, 2, 4, 7, 1, 8, 5};
+
+	n = 9;
+	l = 0;
+
+	for (int i = 0; i < k; i++)
 	{
-		int q=0;
-		while(v[i] > c1[i1-1])
-		{
-			c1[i1++] = v[i++];
-			q=1;
-		}
-		while(v[i] > c2[i2-1] && v[i] < c1[i1-1])
-		{
-			c2[i2++] = v[i++];
-			q=1;
-		}
-		while(v[i] > c3[i3-1] && v[i] < c1[i1-1] && v[i] < c2[i2-1])
-		{
-			c3[i3++] = v[i++];
-			q=1;
-		}
-		if(!q)
-			i++;
+		v[i].a[0] = 0;
+		v[i].j = 0;
+		v[i].m = 1;
 	}
-
-	int j1=1;
-	int j2=1;
-	int j3=1;
+	int i = 0;
 	
-	int k=1;
-	while(k<=9)
+		while(l < k && i<n)
+		{
+				int q = 0;
+				if (c[i] > v[l].a[v[l].j])
+				{
+					v[l].j++;
+					v[l].a[v[l].j] = c[i];
+					cout<<c[i];
+					i++;
+					q = 1;
+				}
+				if (q)
+					l = 0;
+				else
+					l++;
+		}
+
+	cout<<endl;
+	for(int j=0; j<=2; j++)
 	{
-		if(c1[j1] <= c2[j2] && c1[j1] <= c3[j3])
+	for(int i = 1; i <= v[j].j; i++)
+		cout<<v[j].a[i];
+		cout<<endl;
+		}		
+/*
+
+	int sum = 0;
+	for(int i = 0; i<k; i++)
+		sum += v[i].j;
+	int min;
+	int h = 0;
+
+	while(h < sum)
+	{
+		min = v[0].a[1];
+		for(int i=0; i<k; i++)
 		{
-			cout<<c1[j1++];
-			k++;
+			if(v[i].a[v[i].m] < min)
+			{
+				min = i;
+			}
 		}
-		if(c2[j2] <= c1[j1] && c2[j2] <= c3[j3])
-		{
-			cout<<c2[j2++];
-			k++;
-		}
-		if(c3[j3] <= c1[j1] && c3[j3] <= c2[j2])
-		{
-			cout<<c3[j3++];
-			k++;
-		}
+		cout<<v[min].a[v[min].m];
+		h++;
+		v[min].m++;
 	}
+*/
+	return (0);
 
 }
