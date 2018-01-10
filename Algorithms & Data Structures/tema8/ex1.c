@@ -166,7 +166,7 @@ int main()
 
 	root = insert(root, 2);
     insert(root, 8);
-    insert(root, 1);
+    insert(root, 5);
     insert(root, 4);
     insert(root, 6);
     insert(root, 9);
